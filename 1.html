@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+<meta charset="UTF-8">
+<title>B soft llc</title>
+<style>
+body {
+  margin:0;
+  padding:0;
+  background:#f0e6f6;
+  font-family: Arial, sans-serif;
+}
+
+#envelope {
+  position: relative;
+  width: 280px;
+  height: 180px;
+  margin: 150px auto 0 auto;
+  perspective: 600px;
+  cursor:pointer;
+}
+
+/* Flap */
+.flap {
+  position:absolute;
+  top:0; left:0;
+  width:0; height:0;
+  border-left:140px solid transparent;
+  border-right:140px solid transparent;
+  border-bottom:82px solid transparent;
+  border-top:98px solid #d9534f;
+  transform-origin: top center;
+  transition: transform 1s ease;
+  z-index:3;
+}
+
+/* Pocket */
+.pocket {
+  position:absolute;
+  bottom:0; left:0;
+  width:0; height:0;
+  border-left:140px solid #f5a3a2;
+  border-right:140px solid #f5a3a2;
+  border-top:90px solid transparent;
+  border-bottom:90px solid #ff6f61;
+  border-bottom-left-radius:6px;
+  border-bottom-right-radius:6px;
+}
+
+/* Letter */
+.letter {
+  position:absolute;
+  top:40px; /* эхэнд доогуур */
+  left:20px;
+  width:240px;
+  height:120px;
+  background:#fff;
+  border-radius:6px;
+  box-shadow:0 2px 26px rgba(0,0,0,0.12);
+  padding:10px;
+  box-sizing:border-box;
+  text-align:center;
+  opacity:0;
+  transition: top 1s ease, opacity 1s ease;
+}
+
+.words.line1 { font-weight:bold; font-size:0.9rem; margin-bottom:5px; }
+.words.line2 { font-size:1rem; }
+
+/* Open/Close states */
+.open .flap { transform:rotateX(180deg); z-index:1; }
+.open .letter { top:5px; opacity:1; }
+.close .flap { transform:rotateX(0deg); z-index:3; }
+.close .letter { top:40px; opacity:0; }
+
+.reset { text-align:center; margin-top:20px; }
+.reset button {
+  font-weight:800; font-style:normal;
+  background:transparent;
+  border:2px solid #d9534f;
+  border-radius:4px;
+  color:#d9534f;
+  display:inline-block;
+  font-size:14px;
+  text-transform:uppercase;
+  margin:5px;
+  padding:10px;
+  min-width:120px;
+  cursor:pointer;
+  transition:all 0.1s linear;
+}
+.reset button:hover { background-color:#d9534f; color:#fff; }
+
+ul { text-align:center; margin-top:20px; font-size:1rem; list-style:none; padding:0; }
+ul li { margin:5px 0; }
+</style>
+</head>
+<body>
+
+<div id="envelope" class="close">
+  <div class="flap"></div>
+  <div class="pocket"></div>
+  <div class="letter">
+    <div class="words line1">B soft llc</div>
+    <div class="words line2">
+      B soft компанийн ажилтан таньд кампанийн шинэ жилийн баярт хүрэлцэн ирэх урилга илгээж байна.
+    </div>
+  </div>
+</div>
+
+<div class="reset">
+  <button id="open">Open</button>
+  <button id="reset">Close</button>
+</div>
+
+<ul>
+  <li>Байршил : Tuushin hotel 25 Давхарт</li>
+  <li>Утас : 97177788</li>
+</ul>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  var envelope = $("#envelope");
+  var btn_open = $("#open");
+  var btn_reset = $("#reset");
+
+  function open(){ envelope.addClass("open").removeClass("close"); }
+  function close(){ envelope.addClass("close").removeClass("open"); }
+
+  envelope.click(open);
+  btn_open.click(open);
+  btn_reset.click(close);
+});
+</script>
+
+</body>
+</html>
